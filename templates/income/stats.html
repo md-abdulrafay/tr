@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Income Summary</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Summary</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="col-md-2">
+      <a href="" class="btn btn-primary">BACK</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <canvas id="incomeChart" width="400" height="200"></canvas>
+      <div
+        id="noIncomeDataMessage"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        No data available to display.
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <canvas id="weeklyIncomeChart" width="400" height="200"></canvas>
+      <div
+        id="noWeeklyIncomeDataMessage"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        No data available to display.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <canvas id="yearlyIncomeChart" width="400" height="200"></canvas>
+      <div
+        id="noYearlyIncomeDataMessage"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        No data available to display.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/incomecharts.js' %}"></script>
+
+{% endblock content %}

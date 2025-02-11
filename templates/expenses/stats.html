@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Expenses Summary</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Summary</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="col-md-2">
+      <a href="" class="btn btn-primary">BACK</a>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <canvas id="myChart" width="400" height="200"></canvas>
+      <div
+        id="noDataMessage"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        No data available to display.
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <canvas id="weeklyChart" width="400" height="200"></canvas>
+      <div
+        id="noWeeklyDataMessage"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        No data available to display.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <canvas id="yearlyChart" width="400" height="200"></canvas>
+      <div
+        id="noYearlyDataMessage"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        No data available to display.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/expensecharts.js' %}"></script>
+
+{% endblock content %}

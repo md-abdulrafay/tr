@@ -1,0 +1,256 @@
+{% load static %}
+<!-- Debug: show current URL name (remove once confirmed) -->
+<div style="display: none">
+  Current URL: {{ request.resolver_match.url_name }}
+</div>
+
+<style>
+  /* Inline CSS to override active link styling */
+  .nav-link.active {
+    font-weight: normal !important;
+    font-size: 1rem !important; /* Changed to 1rem */
+    background-color: transparent !important;
+    color: #ffffff !important;
+  }
+</style>
+
+<nav
+  class="col-md-2 d-none d-md-block sidebar"
+  style="margin-top: 54px; background-color: #000000; font-size: 1rem" /* Changed to 1rem */
+>
+  <div class="sidebar-sticky" style="background-color: #000000">
+    <!-- Main navigation -->
+    <ul class="nav flex-column" style="font-size: 1rem;"> <!-- Ensure consistent font size -->
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+          href="{% url 'dashboard' %}"
+          style="color: #ffffff; font-size: inherit"
+        >
+          <!-- Dashboard icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-bar-chart-line"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1zm1 12h2V2h-2zm-3 0V7H7v7zm-5 0v-3H2v3z"
+            />
+          </svg>
+          Dashboard
+        </a>
+      </li>
+    </ul>
+
+    <!-- Debit / Credit heading -->
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted"
+      style="color: #ffffff"
+    >
+      <span>Debit / Credit</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+        style="color: #ffffff"
+      >
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+
+    <ul class="nav flex-column">
+      <!-- Expenses -->
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.resolver_match.url_name == 'expenses' %}active{% endif %}"
+          href="{% url 'expenses' %}"
+          style="color: #ffffff; font-size: inherit"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-cash-coin"
+            viewBox="0 0 16 16"
+          >
+            <!-- SVG paths for the icon -->
+            <path
+              fill-rule="evenodd"
+              d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"
+            />
+            <path
+              d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z"
+            />
+            <path
+              d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"
+            />
+            <path
+              d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567"
+            />
+          </svg>
+          Expenses
+        </a>
+      </li>
+      <!-- Income -->
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.resolver_match.url_name == 'income' %}active{% endif %}"
+          href="{% url 'income' %}"
+          style="color: #ffffff; font-size: inherit"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-cash-stack"
+            viewBox="0 0 16 16"
+          >
+            <!-- SVG paths for the icon -->
+            <path
+              d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"
+            />
+            <path
+              d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"
+            />
+          </svg>
+          Income
+        </a>
+      </li>
+    </ul>
+
+    <!-- Summary heading -->
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+      style="color: #ffffff"
+    >
+      <span>Summary</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+        style="color: #ffffff"
+      >
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <!-- Expenses Summary -->
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.resolver_match.url_name == 'stats' %}active{% endif %}"
+          id="expenses-summary-link"
+          href="{% url 'stats' %}"
+          style="color: #ffffff; font-size: inherit"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-graph-down"
+            viewBox="0 0 16 16"
+          >
+            <!-- SVG paths for the icon -->
+            <path
+              fill-rule="evenodd"
+              d="M0 0h1v15h15v1H0zm14.817 11.887a.5.5 0 0 0 .07-.704l-4.5-5.5a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61 4.15 5.073a.5.5 0 0 0 .704.07"
+            />
+          </svg>
+          Expenses Summary
+        </a>
+      </li>
+      <!-- Income Summary -->
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.resolver_match.url_name == 'income_stats' %}active{% endif %}"
+          id="income-summary-link"
+          href="{% url 'income_stats' %}"
+          style="color: #ffffff; font-size: inherit"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-graph-up"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/>
+          </svg>
+          Income Summary
+        </a>
+      </li>
+    </ul>
+
+    <!-- Settings heading -->
+    <h6
+      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+      style="color: #ffffff"
+    >
+      <span>Settings</span>
+      <a
+        class="d-flex align-items-center text-muted"
+        href="#"
+        aria-label="Add a new report"
+        style="color: #ffffff"
+      >
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <!-- General -->
+      <li class="nav-item">
+        <a
+          class="nav-link {% if request.resolver_match.url_name == 'preferences' %}active{% endif %}"
+          href="{% url 'preferences' %}"
+          style="color: #ffffff; font-size: inherit"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-gear"
+            viewBox="0 0 16 16"
+          >
+            <!-- SVG paths for the icon -->
+            <path
+              d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"
+            />
+            <path
+              d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"
+            />
+          </svg>
+          General
+        </a>
+      </li>
+      <!-- Account -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin:index' %}" style="color: #ffffff; font-size: inherit">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-person-gear"
+            viewBox="0 0 16 16"
+          >
+            <!-- SVG paths for the icon -->
+            <path
+              d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"
+            />
+          </svg>
+          Admin
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

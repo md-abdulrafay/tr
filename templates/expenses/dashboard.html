@@ -1,0 +1,167 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Updated to use Poppins font -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+  rel="stylesheet"
+/>
+{% include 'partials/_messages.html'%} {% csrf_token %}
+
+<div class="d-flex justify-content-end align-items-center mt-3">
+  <a href="{% url 'category_insights' %}" class="btn btn-dark"
+    >Show Category Insights</a
+  >
+</div>
+<div class="balance-dashboard">
+  <h2 class="display">Balance Overview</h2>
+  <div class="card-deck">
+    <div class="card text-white bg-success mb-3">
+      <div class="card-header">
+        Balance
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          class="bi bi-bank float-right"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"
+          />
+        </svg>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title remaining-balance">$0</h5>
+      </div>
+    </div>
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-header">
+        Total Income
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          class="bi bi-cash-stack float-right"
+          viewBox="0 0 16 16"
+        >
+          <path d="M3 2a1 1 0 0 0-1 1v1h12V3a1 1 0 0 0-1-1H3z" />
+          <path
+            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2z"
+          />
+          <path
+            d="M8 5.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 .5-.5z"
+          />
+        </svg>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title total-income">$0</h5>
+      </div>
+    </div>
+    <div class="card text-white bg-danger mb-3">
+      <div class="card-header">
+        Total Expenses
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          class="bi bi-cash float-right"
+          viewBox="0 0 16 16"
+        >
+          <path d="M8.5 1a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+          <path
+            d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-11zM2.5 2a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5h-11z"
+          />
+          <path
+            d="M13 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM9 5a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"
+          />
+          <path
+            d="M1 9a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm1-1a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2H2z"
+          />
+        </svg>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title total-expenses">$0</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="balance-charts col-md-9">
+  <h2 class="display">Balance Charts</h2>
+  <canvas id="balanceChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  let balanceChart;
+
+  const renderBalanceChart = (income, expenses) => {
+    console.log(
+      "Rendering chart with income:",
+      income,
+      "and expenses:",
+      expenses
+    );
+    const ctx = document.getElementById("balanceChart").getContext("2d");
+    if (balanceChart) {
+      balanceChart.destroy();
+    }
+    balanceChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Income", "Expenses"],
+        datasets: [
+          {
+            label: "Amount",
+            data: [income, expenses],
+            backgroundColor: [
+              "rgba(76, 175, 80, 0.2)",
+              "rgba(244, 67, 54, 0.2)",
+            ],
+            borderColor: ["#4caf50", "#f44336"],
+            borderWidth: 1,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  };
+
+  const updateBalanceUI = async () => {
+    try {
+      console.log("Fetching balance data...");
+      const response = await fetch("/api/balance/");
+      const data = await response.json();
+      console.log("Balance data fetched:", data);
+
+      document.querySelector(
+        ".total-income"
+      ).textContent = `$${data.total_income}`;
+      document.querySelector(
+        ".total-expenses"
+      ).textContent = `$${data.total_expenses}`;
+      document.querySelector(
+        ".remaining-balance"
+      ).textContent = `$${data.balance}`;
+
+      renderBalanceChart(data.total_income, data.total_expenses);
+    } catch (error) {
+      console.error("Error fetching balance data:", error);
+    }
+  };
+
+  window.onload = () => {
+    updateBalanceUI();
+  };
+</script>
+
+{% endblock %}

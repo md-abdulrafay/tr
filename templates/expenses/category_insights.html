@@ -1,0 +1,367 @@
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .card-header {
+    font-size: 1.5rem;
+  }
+  .card-body {
+    font-size: 1.2rem;
+  }
+  .balance-card {
+    transform: scale(1.1);
+  }
+  .icon-large {
+    width: 24px;
+    height: 24px;
+  }
+  .balance-dashboard {
+    text-align: center;
+  }
+  .card-deck {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+</style>
+{% endblock %} {% block content %}
+<a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3 float-right"
+  >Back to Dashboard</a
+>
+
+<div class="balance-dashboard mt-5">
+  <h2
+    style="font-family: 'Roboto', sans-serif; font-weight: bold; display: block"
+  >
+    Category Insights
+  </h2>
+  <div class="card-deck">
+    <div class="card text-white bg-success mb-3 balance-card">
+      <div class="card-header">
+        <strong style="font-family: 'Roboto', sans-serif">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-cash icon-large"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+            <path
+              d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z"
+            />
+          </svg>
+        </strong>
+      </div>
+      <div class="card-body">
+        <h5
+          class="card-title remaining-balance"
+          style="font-family: 'Roboto', sans-serif"
+        >
+          Balance: $0
+        </h5>
+        <p
+          class="card-text total-records-count float-right"
+          style="
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+        >
+          0
+        </p>
+      </div>
+    </div>
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-header">
+        <strong style="font-family: 'Roboto', sans-serif">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-piggy-bank icon-large"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 1a5 5 0 0 0-4.546 2.916A3.5 3.5 0 0 0 0 7.5V8a2 2 0 0 0 2 2h.5a1.5 1.5 0 0 0 1.415 1H4a1 1 0 0 0 1 1v1h6v-1a1 1 0 0 0 1-1h.085A1.5 1.5 0 0 0 14 10h.5a2 2 0 0 0 2-2v-.5a3.5 3.5 0 0 0-3.454-3.584A5 5 0 0 0 8 1zm0 1a4 4 0 0 1 3.8 2.5H4.2A4 4 0 0 1 8 2zM1 7.5a2.5 2.5 0 0 1 2.5-2.5h9a2.5 2.5 0 0 1 2.5 2.5V8a1 1 0 0 1-1 1h-.5a.5.5 0 0 1-.5-.5V7H2v.5a.5.5 0 0 1-.5.5H1a1 1 0 0 1-1-1v-.5z"
+            />
+          </svg>
+        </strong>
+      </div>
+      <div class="card-body">
+        <h5
+          class="card-title most-expensive-category"
+          style="font-family: 'Roboto', sans-serif"
+        >
+          $0
+        </h5>
+        <p
+          class="card-text most-expensive-category-count float-right"
+          style="
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+        >
+          0
+        </p>
+      </div>
+    </div>
+    <div class="card text-white bg-warning mb-3">
+      <div class="card-header">
+        <strong style="font-family: 'Roboto', sans-serif">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-credit-card icon-large"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4zM0 7v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7H0zm2 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+            />
+          </svg>
+        </strong>
+      </div>
+      <div class="card-body">
+        <h5
+          class="card-title second-most-expensive-category"
+          style="font-family: 'Roboto', sans-serif"
+        >
+          $0
+        </h5>
+        <p
+          class="card-text second-most-expensive-category-count float-right"
+          style="
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+        >
+          0
+        </p>
+      </div>
+    </div>
+    <div class="card text-white bg-info mb-3">
+      <div class="card-header">
+        <strong style="font-family: 'Roboto', sans-serif">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-cart icon-large"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 1a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.491-.408L1.01 1.607 1.61 1H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 6.25h8.22l1.25-6.25H3.14zM5.5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm5 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+            />
+          </svg>
+        </strong>
+      </div>
+      <div class="card-body">
+        <h5
+          class="card-title third-most-expensive-category"
+          style="font-family: 'Roboto', sans-serif"
+        >
+          $0
+        </h5>
+        <p
+          class="card-text third-most-expensive-category-count float-right"
+          style="
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+        >
+          0
+        </p>
+      </div>
+    </div>
+    <div class="card text-white bg-danger mb-3">
+      <div class="card-header">
+        <strong style="font-family: 'Roboto', sans-serif">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-box-seam icon-large"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8.5.134a1 1 0 0 0-1 0L1.5 3.134a1 1 0 0 0-.5.866v7a1 1 0 0 0 .5.866l6 3a1 1 0 0 0 1 0l6-3a1 1 0 0 0 .5-.866v-7a1 1 0 0 0-.5-.866l-6-3zM8 1.5l5.5 2.75v6.5L8 14.5l-5.5-2.75v-6.5L8 1.5zM7.5 8.5v5l-5-2.5v-5l5 2.5zm1 0l5-2.5v5l-5 2.5v-5z"
+            />
+          </svg>
+        </strong>
+      </div>
+      <div class="card-body">
+        <h5
+          class="card-title other-categories"
+          style="font-family: 'Roboto', sans-serif"
+        >
+          Others: $0
+        </h5>
+        <p
+          class="card-text other-categories-count float-right"
+          style="
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            padding: 2px 5px;
+            border-radius: 3px;
+          "
+        >
+          0
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="balance-charts col-md-8">
+  <h2 class="display"><strong>Balance Charts</strong></h2>
+  <canvas id="balanceChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  let balanceChart;
+
+  const renderBalanceChart = (income, expenses) => {
+    console.log(
+      "Rendering chart with income:",
+      income,
+      "and expenses:",
+      expenses
+    );
+    const ctx = document.getElementById("balanceChart").getContext("2d");
+    if (balanceChart) {
+      balanceChart.destroy();
+    }
+    balanceChart = new Chart(ctx, {
+      type: "bar", // Changed from "line" to "bar"
+      data: {
+        labels: ["Income", "Expenses"],
+        datasets: [
+          {
+            label: "Amount",
+            data: [income, expenses],
+            backgroundColor: [
+              "rgba(76, 175, 80, 0.2)",
+              "rgba(244, 67, 54, 0.2)",
+            ],
+            borderColor: ["#4caf50", "#f44336"],
+            borderWidth: 1,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        indexAxis: "y", // Added to make the bar chart horizontal
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                family: "'Roboto', sans-serif", // Match font family
+              },
+            },
+          },
+        },
+      },
+    });
+  };
+
+  const updateCategoryInsightsUI = async () => {
+    try {
+      const response = await fetch("/api/balance/");
+      const data = await response.json();
+
+      document.querySelector(
+        ".remaining-balance"
+      ).textContent = `Balance: $${data.balance}`;
+      document.querySelector(
+        ".total-records-count"
+      ).textContent = `${data.total_records}`;
+
+      const categoryResponse = await fetch("/expense_category_summary/");
+      const categoryData = await categoryResponse.json();
+
+      const categories = Object.entries(categoryData.expense_category_data);
+      categories.sort((a, b) => b[1] - a[1]);
+
+      document.querySelector(
+        ".most-expensive-category"
+      ).textContent = `${categories[0][0]}: $${categories[0][1]}`;
+      document.querySelector(".most-expensive-category-count").textContent = `${
+        categoryData.expense_category_count[categories[0][0]]
+      }`;
+
+      document.querySelector(
+        ".second-most-expensive-category"
+      ).textContent = `${categories[1][0]}: $${categories[1][1]}`;
+      document.querySelector(
+        ".second-most-expensive-category-count"
+      ).textContent = `${
+        categoryData.expense_category_count[categories[1][0]]
+      }`;
+
+      document.querySelector(
+        ".third-most-expensive-category"
+      ).textContent = `${categories[2][0]}: $${categories[2][1]}`;
+      document.querySelector(
+        ".third-most-expensive-category-count"
+      ).textContent = `${
+        categoryData.expense_category_count[categories[2][0]]
+      }`;
+
+      const otherCategoriesTotal = categories
+        .slice(3)
+        .reduce((sum, category) => sum + category[1], 0);
+      const otherCategoriesCount = categories
+        .slice(3)
+        .reduce(
+          (sum, category) =>
+            sum + categoryData.expense_category_count[category[0]],
+          0
+        );
+      document.querySelector(
+        ".other-categories"
+      ).textContent = `Others: $${otherCategoriesTotal}`;
+      document.querySelector(
+        ".other-categories-count"
+      ).textContent = `${otherCategoriesCount}`;
+
+      renderBalanceChart(data.total_income, data.total_expenses);
+    } catch (error) {
+      console.error("Error fetching category insights data:", error);
+    }
+  };
+
+  window.onload = () => {
+    updateCategoryInsightsUI();
+  };
+</script>
+{% endblock %}
