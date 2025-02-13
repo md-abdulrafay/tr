@@ -2,11 +2,14 @@
 
 echo "BUILD START"
 
-# Install Pipenv if not installed
-pip install pipenv
+# Ensure pip is installed
+python3.9 -m ensurepip --default-pip
+
+# Install Pipenv
+python3.9 -m pip install --upgrade pipenv
 
 # Install dependencies using Pipenv
-pipenv install --system
+python3.9 -m pipenv install --system
 
 # Collect static files
 python3.9 manage.py collectstatic --noinput --clear
