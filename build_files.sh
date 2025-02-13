@@ -3,15 +3,15 @@
 echo "BUILD START"
 
 # Ensure pip is installed
-python3.9 -m ensurepip --default-pip
+python3.11 -m ensurepip --default-pip
 
-# Install Pipenv
-python3.9 -m pip install --upgrade pipenv
+# Upgrade pip
+python3.11 -m pip install --upgrade pip
 
-# Install dependencies using Pipenv
-python3.9 -m pipenv install --system
+# Install dependencies from requirements.txt
+python3.11 -m pip install -r requirements.txt
 
 # Collect static files
-python3.9 manage.py collectstatic --noinput --clear
+python3.11 manage.py collectstatic --noinput --clear
 
 echo "BUILD END"
