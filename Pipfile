@@ -13,6 +13,7 @@ gunicorn = "*"
 validate-email = "*"
 six = "*"
 python-dotenv = "*"
+dj-database-url = "==2.3.0"
 
 [requires]
 python_version = "3.11"
